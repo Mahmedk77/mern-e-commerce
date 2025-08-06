@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String,
+    type: Array,
     required: true,
   },
   category: {
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   size: {
-    type: String,
+    type: Array,
     required: true,
   },
   bestseller: {
@@ -35,7 +35,7 @@ const productSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 }, { timestamps: true });
 

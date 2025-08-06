@@ -21,9 +21,11 @@ app.get('/', (req, res) => {
 
 
 //if nodemon does clean-exit, there could be problem with env variables.
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`server is running on http://localhost:${PORT}`);
-    connectToDataBase();
-    connectToCloud();
+    await connectToDataBase();
+    await connectToCloud();
     
 })
+
+// "eyJhbGciOiJIUzI1NiJ9.bWFrQGdtYWlsLmNvbXF3ZXJ0eTEyMw.lmiRuNGtCEOCJjPkO7XwRXnOZBZDRg7ZgR1wjFX_6Q0"

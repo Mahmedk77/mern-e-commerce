@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 
-import { JWT_SECRET } from "../config/env.config.js";
+import { ADMIN_EMAIL, ADMIN_PASSWORD, JWT_SECRET } from "../config/env.config.js";
 
 const createToken = (id) => {
     return jwt.sign({id}, JWT_SECRET)
@@ -89,18 +89,39 @@ export const registerUser = async (req, res) => {
     });
 
     } catch (error) {
-    
-
-    console.log(error);
-    
-    res.json({
-        success: false,
-        message: error.message
-    }); 
+        console.log(error);
+        
+        res.json({
+            success: false,
+            message: error.message
+        }); 
     }
 }
 
 //Controller for Admin SignIn
-export const adminLogin = async () => {
+export const adminLogin = async (req, res) => {
+
+    try {   
+        const { email, password } = req.body;
+
+        if( !(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) ){
+            res.status(401).json({ success: false, message: "Invalid Credentials" });
+        }
+        
+        const token = jwt.sign(email+password, JWT_SECRET );
+        
+        res.status(200).json({success: true, token});
+
+        
+        
+    } catch (error) {
+        console.log(error);
+        
+        res.json({
+            success: false,
+            message: error.message
+        });
+        
+    }
 
 }

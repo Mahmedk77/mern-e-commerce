@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import { addProduct, removeProduct, singleProduct, listProducts } from '../controllers/products.controller.js';
 import upload from '../middlewares/multer.middleware.js';
+import {adminAuth} from '../middlewares/auth.middleware.js'
 
 const productRouter = Router();
 
@@ -11,9 +12,9 @@ const multerData = [
     { name: 'image4', maxCount: 1}, 
 ]
 
-productRouter.post('/add', upload.fields(multerData), addProduct);
-productRouter.post('/remove', removeProduct);
-productRouter.post('/single', singleProduct);
-productRouter.get('/list', listProducts);
+productRouter.post('/add', adminAuth, upload.fields(multerData), addProduct);
+productRouter.post('/remove', adminAuth, removeProduct);
+productRouter.get('/single', adminAuth, singleProduct);
+productRouter.get('/list', adminAuth, listProducts);
 
 export default productRouter;
