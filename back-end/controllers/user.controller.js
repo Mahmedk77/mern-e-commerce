@@ -105,7 +105,7 @@ export const adminLogin = async (req, res) => {
         const { email, password } = req.body;
 
         if( !(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) ){
-            res.status(401).json({ success: false, message: "Invalid Credentials" });
+            return res.status(401).json({ success: false, message: "Invalid Credentials" });
         }
         
         const token = jwt.sign(email+password, JWT_SECRET );
@@ -119,7 +119,7 @@ export const adminLogin = async (req, res) => {
         
         res.json({
             success: false,
-            message: error.message
+            message: "helloworld"
         });
         
     }
