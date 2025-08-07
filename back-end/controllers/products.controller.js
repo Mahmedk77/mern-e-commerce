@@ -43,11 +43,11 @@ export const addProduct = async (req, res) => {
         console.log(imagesUrl);
         
 
-        res.json({ success: true, message: "Product successfully added" });
+        res.json({ success: true, message: "Product Added Successfully" });
         
     } catch (error) {
         console.log(error);
-        res.json({ message: error.message })
+        res.json({ success: false, message: "Failed to add product. Try again." })
     }
 
 }

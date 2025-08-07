@@ -17,16 +17,11 @@ const Login = ({ setToken }) => {
             
             if(response.data.success){
                 setToken(response.data.token);
-            }else{
-                console.log("test1", response.data.message);
-            
-                toast.error(response.data.message);
-
             }
-
         } catch (error) {
             console.log("test2", error)
-            toast.error(error.message);    
+            const errMessage = error.response?.data?.message || error.message || "Unknown Error Occured";
+            toast.error(errMessage);    
         }
     }
 
