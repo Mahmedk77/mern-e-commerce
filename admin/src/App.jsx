@@ -4,9 +4,11 @@ import { Navbar, Sidebar } from './components'
 import { useEffect, useState } from 'react'
 import { Login } from './components/';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+export const currency = "$";
 
 function App() {
   

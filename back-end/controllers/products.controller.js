@@ -56,7 +56,7 @@ export const addProduct = async (req, res) => {
 export const listProducts= async (req, res) => {
     try {
         const products =  await Product.find();
-        res.status(201).json({success: true, data: {products, nHbits: products.length}});
+        res.json({success: true, products, nHbits: products.length});
 
     } catch (error) {
         console.log(error);
@@ -67,24 +67,32 @@ export const listProducts= async (req, res) => {
 
 export const removeProduct = async (req, res) => {
     try {
-        const  { productId }  = req.body;
-        await Product.findByIdAndDelete(productId);
+        const { id } = req.body;
 
-        res.status(200).json({success: true, message: 'Product removed'});
+        if (!id) {
+            return res.status(400).json({ success: false, message: "Product ID is required" });
+        }
+
+        const deletedProduct = await Product.findByIdAndDelete(id);
+
+        if (!deletedProduct) {
+            return res.status(404).json({ success: false, message: "Product not found" });
+        }
+
+        res.json({ success: true, message: "Product removed" });
     } catch (error) {
-        console.log(error);
-        res.status(404).json({success: false, messsage: error.message})
-        
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
     }
-    
-}
+};
+
 
 //
 export const singleProduct = async (req, res) => {
 
     try {
-        const  { productId }  = req.body;
-        const product = await Product.findById(productId);
+        const  { id }  = req.body;
+        const product = await Product.findById(id);
 
     res.status(200).json({success: true, data: product});
     } catch (error) {
