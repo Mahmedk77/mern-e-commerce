@@ -3,8 +3,15 @@ import { assets, data } from '../assets/assets.js';
 import { backendUrl } from '../App.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+// import { appendAllData } from '../utils/storeAll.js';
 
 const Add = ({ token }) => {
+
+  //! Function for appending all 52 data sets...
+  // const handelAppend = async () => {
+  //   await appendAllData(token);
+  // }
+
 
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
@@ -21,7 +28,6 @@ const Add = ({ token }) => {
   const [selectedSizes, setSelectedSizes ] = useState([]);
 
 
-
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -32,7 +38,6 @@ const Add = ({ token }) => {
       formData.append("name", name);
       formData.append("description", description);
       formData.append("price", price);
-      formData.append("category", category);
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("bestseller", bestseller);
@@ -62,18 +67,13 @@ const Add = ({ token }) => {
         
       } 
       
-      
-
-      
     } catch (error) {
       console.log(error)
       toast.error(error.message)
     }
   }
-
-
   
-  return (
+  return (<>
     <form onSubmit={onSubmitHandler} className='flex flex-col gap-3 w-full items-start'>
       <div>
         <p className='mb-2'>Upload Image</p>
@@ -148,14 +148,16 @@ const Add = ({ token }) => {
         <input onChange={() => setBestseller(prev => !prev)} checked={bestseller} type="checkbox" id='bestseller' />
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
+    <button type='submit'  className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
-      <button type='submit' className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
     </form>
-  )
+    {/!* use this button to append 52 data sets */}
+    {/* <button onClick={handelAppend}  className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>  */}
+
+  </>)
 }
 
 export default Add
 
-// <input onChange={setBestseller(prev => !prev)} ... /> // this causes immediate calling of setBestseller even the button is toggled 
-// <input onChange={() => setBestseller(prev => !prev)} checked={bestseller} type="checkbox" id='bestseller' /> best approach only works when toggled
+
 

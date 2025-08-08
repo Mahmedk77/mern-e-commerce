@@ -6,6 +6,7 @@ export const addProduct = async (req, res) => {
     try {
         const { name, price, description, category, 
         subCategory, sizes, bestseller }= req.body;
+        // console.log("sizes from req.body:", req.body.sizes);
 
         const image1 =  req.files.image1 && req.files.image1[0];
         const image2 =  req.files.image2 && req.files.image2[0];
@@ -32,8 +33,8 @@ export const addProduct = async (req, res) => {
             sizes: JSON.parse(sizes),
             image: imagesUrl 
         }
-        
-        console.log(productData);
+        // : JSON.parse(sizes),
+        // console.log(productData);
 
         const product = new Product(productData);
         await product.save();
