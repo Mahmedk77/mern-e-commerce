@@ -67,7 +67,7 @@ export const assets = {
     upload_area,
     parcel_icon
 }
-export const data = ["S", "M", "L", "XL", "XXL"];
+
 
 
 

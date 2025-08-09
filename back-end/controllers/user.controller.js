@@ -21,22 +21,21 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({email});
 
     if(!user){
-        return res.status(409).json({success: false, message:"User doesn't exist"});
+        return res.json({success: false, message:"User doesn't exist"});
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if(!isMatch){
-        return res.status(409).json({success:false, message: "Password is incorrect"});
+        return res.json({success:false, message: "Password is incorrect"});
     }
 
     const token = createToken(user._id);
     res.status(201).json({
         success: true, 
-        data:{
-            user, 
-            token
-    }});
+        user, 
+        token
+    });
 
     } catch (error) {
         console.log(error);
@@ -56,15 +55,15 @@ export const registerUser = async (req, res) => {
     const exists = await User.findOne({email});
 
     if(exists){
-        return res.status(409).json({success: false, message: "Email already exists"});
+        return res.json({success: false, message: "Email already exists"});
     }
 
     //validating email format
     if(!validator.isEmail(email)){
-        return res.status(409).json({success: false, message: "Please enter a valid email"});
+        return res.json({success: false, message: "Please enter a valid email"});
     }
     if(password.length < 8){
-        return res.status(409).json({success: false, message: "Please enter a strong password"});
+        return res.json({success: false, message: "Please enter a strong password"});
     }   
     
     //hashing password
@@ -83,8 +82,9 @@ export const registerUser = async (req, res) => {
     const token = createToken(user._id);
    
 
-    res.status(201).json({
-        data: {user, token}, 
+    res.json({
+        user,
+        token, 
         success: true
     });
 

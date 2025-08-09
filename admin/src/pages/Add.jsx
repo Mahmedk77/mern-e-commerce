@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { assets, data } from '../assets/assets.js';
+import { assets } from '../assets/assets.js';
 import { backendUrl } from '../App.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 // import { appendAllData } from '../utils/storeAll.js';
 
+
 const Add = ({ token }) => {
 
   //! Function for appending all 52 data sets...
   // const handelAppend = async () => {
-  //   await appendAllData(token);
+  //   await appendAllData(token);  
   // }
 
-
+  const data = ["S", "M", "L", "XL", "XXL"];
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -73,7 +74,7 @@ const Add = ({ token }) => {
     }
   }
   
-  return (<>
+  return (
     <form onSubmit={onSubmitHandler} className='flex flex-col gap-3 w-full items-start'>
       <div>
         <p className='mb-2'>Upload Image</p>
@@ -151,10 +152,9 @@ const Add = ({ token }) => {
     <button type='submit'  className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
     </form>
-    {/!* use this button to append 52 data sets */}
-    {/* <button onClick={handelAppend}  className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>  */}
+    //<button onClick={handelAppend}  className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
-  </>)
+)
 }
 
 export default Add

@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router'
 import { ShopContext } from '../context/ShopContext.jsx'
 const Navbar = () => {
   const [visible, setVisible] = useState(false)
-  const {setShowSearch, getCartCount}  = useContext(ShopContext)
+  const {setShowSearch, getCartCount, token}  = useContext(ShopContext)
   return (
     <div className='flex items text-center justify-between py-5 font-medium'>
         <Link to={'/'}>
@@ -33,7 +33,7 @@ const Navbar = () => {
             <img onClick={()=>setShowSearch((prev)=>!prev)} src={assets.search_icon} alt="search icon image"  className='w-5 cursor-pointer'/>
             </Link>
             <div className='group relative'>
-                <Link to={'/login'}>
+                <Link to={`${token === "" ? "/login" : "/" }`}>
                 <img src={assets.profile_icon} alt="profile icon image" className='w-5 cursor-pointer'/>
                 </Link>
                 <div className='group-hover:block hidden  absolute dropdown-menu right-0 pt-4'>

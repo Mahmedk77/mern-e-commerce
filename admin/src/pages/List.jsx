@@ -2,19 +2,24 @@ import { useEffect, useState } from 'react';
 import { backendUrl, currency } from '../App.jsx'
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import ClipLoader from "react-spinners/ClipLoader";
+import CircleLoader from 'react-spinners/CircleLoader';
+import SyncLoader from 'react-spinners/SyncLoader'
 const List = ({ token }) => {
  
   const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchList = async () => {
     try {
       
+      setIsLoading(true);
       const response = await axios.get(backendUrl + '/api/product/list', { headers: { token } });
       console.log(response);
       
       if(response.data.success){
         setList(response.data.products);
+        setIsLoading(false)
       } else{
         toast.error(response.data.message);
       }
@@ -48,7 +53,9 @@ const List = ({ token }) => {
   }, [])
 
   return (
-    <>
+    isLoading 
+    ? <div className='h-screen flex justify-center items-center'><ClipLoader color={"black"} loading={true} size={50}  /></div>
+    : <>
       <p className='mb-2'>All Products List</p>
         <div className='flex flex-col gap-2'>
             {/* ----------------List Table Titles---------------------- */}

@@ -15,6 +15,6 @@ const multerData = [
 productRouter.post('/add', adminAuth, upload.fields(multerData), addProduct);
 productRouter.post('/remove', adminAuth, removeProduct);
 productRouter.get('/single', adminAuth, singleProduct);
-productRouter.get('/list', adminAuth, listProducts);
+productRouter.get('/list', listProducts);
 
 export default productRouter;

@@ -1,16 +1,25 @@
-import { createContext, use, useEffect, useState } from "react";
-import { products } from "../assets/assets.js";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import axios from 'axios';
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
+
+    const currency = "$";
+    const delivery_fee = 10;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [showSearch, setShowSearch] = useState(false);
     const [search, setSearch] = useState("");
     const [cartItems, setCartItems] = useState({});
+    const [products, setProducts] = useState([]);
+    const [token, setToken] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getProductsData();
+    }, [])
 
     const addToCart = async (itemId, size) => {
 
@@ -89,17 +98,40 @@ const ShopContextProvider = (props) => {
 
     } 
 
+
+
+    const getProductsData = async () => {
+        try {
+            const response = await axios.get(backendUrl+ '/api/product/list')
+            console.log(response.data);
+            if(response.data.products){
+                setProducts(response.data.products);
+            } else{
+                toast.error(response.data.message);
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+
+    }
+
     useEffect(()=>{
         getCartCount();
         console.log(getCartCount());
     }, [cartItems])
 
-    const currency = "$";
-    const delivery_fee = 10;
+    useEffect(() => {
+        if(!token && localStorage.getItem('token')) {
+            setToken(localStorage.getItem("token"));
+        }
+    }, [])
+    
     const value = {
         products, currency, delivery_fee, showSearch, setShowSearch,
         search, setSearch, cartItems, setCartItems, addToCart, getCartCount,
-        updateQuantity, getCartAmount, navigate,
+        updateQuantity, getCartAmount, navigate, backendUrl, token, setToken
     }
 
     
