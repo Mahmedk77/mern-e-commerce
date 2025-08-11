@@ -46,7 +46,10 @@ const Navbar = () => {
                 {token &&
                 <div className='group-hover:block hidden  absolute dropdown-menu right-0 pt-4'>
                     <div className='flex flex-col justify-center items-center bg-slate-100 gap-2 w-36 px-5 py-3 rounded-md  text-gray-700'>
-                        <p onClick={() => navigate('/https://github.com/Mahmedk77/mern-e-commerce')} className='hover:text-black cursor-pointer'>Source Code</p>
+                        
+                        <a href="https://github.com/Mahmedk77/mern-e-commerce" target='_blank'>
+                        <p className='hover:text-black cursor-pointer'>Source Code</p>
+                        </a>    
                         <p onClick={() => navigate('/orders')} className='hover:text-black cursor-pointer'>Orders</p>
                         <p onClick={handleLogout} className='hover:text-black cursor-pointer'>Logout</p>
                     </div>
