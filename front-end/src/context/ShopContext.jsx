@@ -28,25 +28,26 @@ const ShopContextProvider = (props) => {
             toast.error('Please select a size');
             return;
         } 
-        if(cartData[itemId]){
-            if(cartData[itemId][size]){
+        if(cartData[itemId]){ //is there any item with this id in the cart?  
+            //if yes...
+            if(cartData[itemId][size]){ //check if there is any size for this item id, if yes then add that size
                 cartData[itemId][size] += 1;
             }
-            else{
+            else{ //if no create a new size(key:value pair) and set its size to 1
                 cartData[itemId][size] = 1;
             }
-            
+            //if no...
         }else{
-            cartData[itemId] = {};
-            cartData[itemId][size] = 1;
+            cartData[itemId] = {}; //create an object for item id ==> cartData: { itemId: {} }
+            cartData[itemId][size] = 1; //create a size key-value pair ==> cartData: { itemId: { "M": 1 } }
         }
-        setCartItems(cartData);
+        setCartItems(cartData); // {1234: { size: "M": 1, "L": 2 } }
         
         //if logged in:
         if(token){
         try {
-            
-            await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token }});
+            //then send the above data to the api
+            await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token }}); 
             
         } catch (error) {
             console.log(error);
@@ -59,8 +60,13 @@ const ShopContextProvider = (props) => {
 
     const getCartCount = () => {
         let totalCount = 0;
-        for(const items in cartItems){
-            for(const item in cartItems[items]){
+        // cartItems = {
+        // 1234: { "M": 1, "L": 2 }, 
+        // 5678: { "M": 2, "L": 2 },
+        // 9101: { "S": 1, "L": 3 }, 
+        // }
+        for(const items in cartItems){ //1234: { "M": 1, "L": 2 } is items
+            for(const item in cartItems[items]){ //{ "M": 1, "L": 2 } is item
                 try {
                     if (cartItems[items][item] > 0){   //cartItems[items][item] just to reach this we used two loops
                         totalCount += cartItems[items][item]
@@ -122,12 +128,10 @@ const ShopContextProvider = (props) => {
 
     } 
 
-
-
     const getProductsData = async () => {
         try {
             const response = await axios.get(backendUrl+ '/api/product/list')
-            console.log(response.data);
+            // console.log(response.data);
             if(response.data.products){
                 setProducts(response.data.products);
             } else{
@@ -158,7 +162,7 @@ const ShopContextProvider = (props) => {
 
     useEffect(()=>{
         getCartCount();
-        console.log(getCartCount());
+        // console.log(getCartCount());
     }, [cartItems])
 
     useEffect(() => {

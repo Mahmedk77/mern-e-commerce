@@ -15,7 +15,7 @@ const placeOrder = async (req, res) => {
             address,
             paymentMethod: "COD",
             payment: false,
-            date: new Date.now()
+            date: Date.now()
         };
 
         const newOrder = new Order(orderData); //create a copy having orderData to save it
@@ -45,11 +45,29 @@ const placeOrderRazorpay = async (req, res) => {
 
 // All orders for Admin Panel
 const allOrders = async (req, res) => {
+    try {
+
+        const orders = await Order.find({});
+        res.json({ success: true, orders});
+        
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message});
+    }
 
 }
 
 // Order Data for specific user (frontend)
 const userOrders = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const orders = await Order.find({ userId });
+        res.json({ success: true, orders})
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message});
+    }
 
 }
 

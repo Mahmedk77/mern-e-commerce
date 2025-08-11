@@ -3,6 +3,8 @@ import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const PlaceOrder = () => {
     
@@ -46,8 +48,32 @@ const PlaceOrder = () => {
             }
 
             console.log(orderItems);
+            let orderData = {
+                address: formData,
+                items: orderItems,
+                amount: getCartAmount() + delivery_fee
+            }
+
+            switch(method){
+                case 'cod':
+                    const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } });
+                    console.log(response);
+                    
+                    if(response.data.success){
+                        setCartItems({});
+                        toast.success(response.data.message);
+                        navigate('/orders');
+                    } else {
+                        toast.error(response.data.message);
+                    }
+                    break;
+                default:
+                    break;
+            }
             
         } catch (error) {
+            console.log(error);
+            toast.error(error.message);
             
         }
     }
@@ -55,7 +81,7 @@ const PlaceOrder = () => {
 
  
   return (
-    <form className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
+    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
         {/* ----------LEFT SIDE-------------------- */}
         <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
             <div className='text-xl sm:text-2xl my-3'>
