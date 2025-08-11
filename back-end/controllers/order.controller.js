@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 // Placing orders using COD method
 const placeOrder = async (req, res) => {
     try {
-
+        //userId is from middleware using token...
         const { userId, items, amount, address } = req.body;
         
         const orderData = {
@@ -16,9 +16,9 @@ const placeOrder = async (req, res) => {
             paymentMethod: "COD",
             payment: false,
             date: new Date.now()
-        }
+        };
 
-        const newOrder = new Order(orderData);
+        const newOrder = new Order(orderData); //create a copy having orderData to save it
         await newOrder.save();
         await User.findByIdAndUpdate(userId, {cartData: {}}); //to renew cart once orders are placed.
 
