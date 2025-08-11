@@ -67,6 +67,18 @@ const PlaceOrder = () => {
                         toast.error(response.data.message);
                     }
                     break;
+                case 'stripe':
+                    const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } });
+                    if (responseStripe.data.success){
+                        const { session_url } = responseStripe.data;
+                        window.location.replace(session_url);
+                    } else {
+                        toast.error(responseStripe.data.message)
+                    }
+                    break;
+                case 'razor':
+                    navigate('/razorpay')
+
                 default:
                     break;
             }
@@ -125,6 +137,9 @@ const PlaceOrder = () => {
                         <p className={`min-w-3.5 h-3.5 border rounded-full ${method == "cod" ? "bg-green-500" : ""}`}></p>
                         <p className='text-gray-500 text-sm font-medium mx-4' >CASH ON DELIVERY</p>
                     </div>
+                </div>
+                <div className='mt-1 w-full text-right'>
+                <p className='text-red-400 text-xs '>*razorpay is not available at the moment</p>
                 </div>
                 <div className='w-full text-end mt-8'>
                     <button type='submit'  className='bg-black text-white px-16 py-3 text-sm cursor-pointer'>
