@@ -1,4 +1,4 @@
-![Alt text](/front-end/src/assets/ssm121.jpg)
+![Alt text](/front-end/src/assets/ssm121.png)
 # 🛍️ MERN Stack E-Commerce Website
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
