@@ -87,4 +87,10 @@ The project uses **Multer** for handling file uploads and **Cloudinary** for sec
 
 ---
 
-
+## 📸 Screen Shots  
+**Collections:**
+![Alt text](/front-end/src/assets/Ss1.png)
+**Cart:**
+![Alt text](/front-end/src/assets/Ss2.png)
+**Procced to Checkout:**
+![Alt text](/front-end/src/assets/Ss3.png)
