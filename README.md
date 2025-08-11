@@ -17,13 +17,8 @@
 * [About the Project](#-about-the-project)
 * [Features](#-features)
 * [Tech Stack](#-tech-stack)
-* [Project Structure](#-project-structure)
-* [Installation](#-installation)
-* [Environment Variables](#-environment-variables)
-* [Running the Project](#-running-the-project)
 * [Screenshots](#-screenshots)
-* [Future Improvements](#-future-improvements)
-* [License](#-license)
+
 
 ---
 
