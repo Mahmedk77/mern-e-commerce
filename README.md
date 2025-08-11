@@ -1,5 +1,5 @@
-![Alt text]('./front-end/src/assets/ssm121.jpg')
-# 🛍️ MERN Stack Clothing E-Commerce Website
+![Alt text](/front-end/src/assets/ssm121.jpg)
+# 🛍️ MERN Stack E-Commerce Website
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![MERN](https://img.shields.io/badge/MERN-Stack-green.svg)
@@ -71,7 +71,7 @@ The project uses **Multer** for handling file uploads and **Cloudinary** for sec
 
 **Frontend:**
 * React.js
-* Tailwind CSS / Material UI (depending on UI choice)
+* Tailwind CSS 
 * Axios (for API requests)
 
 **Backend:**
@@ -87,5 +87,4 @@ The project uses **Multer** for handling file uploads and **Cloudinary** for sec
 
 ---
 
-## 📂 Project Structure
 
