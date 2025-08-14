@@ -4,7 +4,7 @@ import { About, Cart, Collection, Contact,
          Product } from './pages/index.js'
 import { Footer, Navbar, Search } from './components'
  import { ToastContainer, toast } from 'react-toastify';
-import RazorPay from './pages/RazorPay.jsx';
+import Razorpay from './pages/Razorpay.jsx';
  
  function App() {
   
@@ -24,7 +24,7 @@ import RazorPay from './pages/RazorPay.jsx';
     <Route path={'/product/:id'} element={<Product />}/>
     <Route path={'/login'} element={<Login />}/>
     <Route path={'/orders'} element={<Orders />}/>
-    <Route path={'/razorpay'} element={<RazorPay />}/>
+    <Route path={'/razorpay'} element={<Razorpay />}/>
   </Routes>
   <Footer />
 
