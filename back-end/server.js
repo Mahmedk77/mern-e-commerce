@@ -11,11 +11,7 @@ import ordersRouter from './routes/order.route.js';
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://forever-frontend-tau-lyart.vercel.app', 
-  methods: 'GET,POST,PUT,DELETE',
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/user', userRouter);
@@ -29,13 +25,11 @@ app.get('/', (req, res) => {
     res.send('API working...');
 })
 
+await connectToDataBase();
+await connectToCloud();
 
-//if nodemon does clean-exit, there could be problem with env variables.
-app.listen(PORT, async () => {
-    console.log(`server is running on http://localhost:${PORT}`);
-    await connectToDataBase();
-    await connectToCloud();
-    
+app.listen(PORT, () => {
+    console.log(`Running on http://localhost:${PORT}`)
 })
 
-// "eyJhbGciOiJIUzI1NiJ9.bWFrQGdtYWlsLmNvbXF3ZXJ0eTEyMw.lmiRuNGtCEOCJjPkO7XwRXnOZBZDRg7ZgR1wjFX_6Q0"
+export default app;
