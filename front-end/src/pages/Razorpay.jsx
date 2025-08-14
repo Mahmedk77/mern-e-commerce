@@ -1,9 +1,9 @@
 import React from 'react'
 import { assets } from '../assets/assets'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { NewsLetter } from '../components'
 
-const Razorpay = () => {
+const RazorPay = () => {
   return (
     <>
     <div className='w-full flex flex-col items-center py-12 border-t border-gray-400'>
@@ -25,4 +25,4 @@ const Razorpay = () => {
   )
 }
 
-export default Razorpay
+export default RazorPay

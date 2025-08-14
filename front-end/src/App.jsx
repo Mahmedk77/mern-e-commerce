@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router'
+import { Routes, Route } from 'react-router-dom'
 import { About, Cart, Collection, Contact, 
          Home, Login, Orders, PlaceOrder, 
          Product } from './pages/index.js'
 import { Footer, Navbar, Search } from './components'
  import { ToastContainer, toast } from 'react-toastify';
-import Razorpay from './pages/RazorPay.jsx';
+import RazorPay from './pages/RazorPay.jsx';
  
  function App() {
   
@@ -24,7 +24,7 @@ import Razorpay from './pages/RazorPay.jsx';
     <Route path={'/product/:id'} element={<Product />}/>
     <Route path={'/login'} element={<Login />}/>
     <Route path={'/orders'} element={<Orders />}/>
-    <Route path={'/razorpay'} element={<Razorpay />}/>
+    <Route path={'/razorpay'} element={<RazorPay />}/>
   </Routes>
   <Footer />
 
