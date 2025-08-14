@@ -9,7 +9,7 @@ const ShopContextProvider = (props) => {
 
     const currency = "$";
     const delivery_fee = 10;
-    const backendUrl = "https://mern-e-commerce-production-abc2.up.railway.app";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [showSearch, setShowSearch] = useState(false);
     const [search, setSearch] = useState("");
     const [cartItems, setCartItems] = useState({});
