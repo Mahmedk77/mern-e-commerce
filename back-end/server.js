@@ -12,7 +12,10 @@ import { PORT } from './config/env.config.js';
 const app = express();
 
 app.use(cors({
-  origin: "https://mern-e-commerce-weld.vercel.app",
+  origin: [
+    "https://mern-e-commerce-weld.vercel.app",
+    "https://forever-admin-lilac-eta.vercel.app"
+  ],
   credentials: true
 }));
 
@@ -35,6 +38,7 @@ app.listen(port, "0.0.0.0", async () => {
     console.log(`running on http://localhost:${port}`);
     await connectToDataBase();
     await connectToCloud();
+
 
 })
 
