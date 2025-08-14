@@ -2,8 +2,12 @@ import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets.js'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext.jsx'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const dropdownRef = useRef(null);
   const { setShowSearch, getCartCount, token, setToken, setCartItems, navigate}  = useContext(ShopContext);
 
   const handleLogout = () => {
@@ -12,6 +16,26 @@ const Navbar = () => {
         setToken("");
         setCartItems({});
   }
+
+  const handleClick = () => {
+    if(!token) navigate('/login');
+    setShowProfile(prev => !prev); 
+  }
+
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowProfile(false);
+    }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
 
   return (
     <div className='flex items text-center justify-between py-5 font-medium'>
@@ -45,23 +69,22 @@ const Navbar = () => {
             <Link to={'/collection'}>
             <img onClick={()=>setShowSearch((prev)=>!prev)} src={assets.search_icon} alt="search icon image"  className='w-5 cursor-pointer'/>
             </Link>
-            <div className='group relative'>
-                <img onClick={() => token ? null : navigate('/login') } src={assets.profile_icon} alt="profile icon image" className='w-5 cursor-pointer'/>
-                {/* Dropdown Menu */}
-                {token &&
-                <div className='group-hover:block hidden  absolute dropdown-menu right-0 pt-4'>
-                    <div className='flex flex-col justify-center items-center bg-slate-100 gap-2 w-36 px-5 py-3 rounded-md  text-gray-700'>
-                        
-                        <a href="https://github.com/Mahmedk77/mern-e-commerce" target='_blank'>
-                        <p className='hover:text-black cursor-pointer'>Source Code</p>
-                        </a>    
-                        <p onClick={() => navigate('/orders')} className='hover:text-black cursor-pointer'>Orders</p>
-                        <p onClick={handleLogout} className='hover:text-black cursor-pointer'>Logout</p>
-                    </div>
+            <div className='group relative' ref={dropdownRef}>
+            <img onClick={handleClick} src={assets.profile_icon} alt="profile icon image" className='w-5 cursor-pointer'/>
+
+            {token && (
+                <div className={`${showProfile ? "block" : "hidden"} absolute right-0 pt-4`}>
+                <div className='flex flex-col justify-center items-center bg-slate-100 gap-2 w-36 px-5 py-3 rounded-md text-gray-700'>
+                    <a href="https://github.com/Mahmedk77/mern-e-commerce" target='_blank' rel="noopener noreferrer">
+                    <p className='hover:text-black cursor-pointer'>Source Code</p>
+                    </a>    
+                    <p onClick={() => navigate('/orders')} className='hover:text-black cursor-pointer'>Orders</p>
+                    <p onClick={handleLogout} className='hover:text-black cursor-pointer'>Logout</p>
                 </div>
-                }
-                
+                </div>
+            )}
             </div>
+
             <Link to={'/cart'} className='relative'>
             <img src={assets.cart_icon} alt="shopping cart icon" className='w-5 h-5' />
             <p className='absolute right-[-5px] bottom-[-5px] bg-black w-4 text-center rounded-full text-white leading-4 aspect-square text-[8px]'> {getCartCount()} </p>
@@ -79,7 +102,7 @@ const Navbar = () => {
                 <NavLink onClick={()=>{setVisible(false)}} to={'/about'} className={`py-2 pl-6 border`}>ABOUT</NavLink>
                 <NavLink onClick={()=>{setVisible(false)}} to={'/collection'} className={`py-2 pl-6 border`}>COLLECTIONS</NavLink>
                 <NavLink onClick={()=>{setVisible(false)}} to={'/contact'} className={`py-2 pl-6 border`}>CONTACT</NavLink>
-                <NavLink onClick={()=>{setVisible(false)}} to={'http://localhost:5173/'} className={`py-2 pl-6 border`}>ADMIN PANEL</NavLink>
+                <a href='https://forever-admin-lilac-eta.vercel.app' className={`py-2 pl-6 border`}>ADMIN PANEL</a>
             </div>    
       </div>
         
@@ -89,3 +112,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+// sm:group-hover:block sm:dropdown-menu

@@ -14,7 +14,8 @@ const app = express();
 app.use(cors({
   origin: [
     "https://mern-e-commerce-weld.vercel.app",
-    "https://forever-admin-lilac-eta.vercel.app"
+    "https://forever-admin-lilac-eta.vercel.app",
+    "http://localhost:5173"
   ],
   credentials: true
 }));
