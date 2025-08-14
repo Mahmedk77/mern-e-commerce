@@ -6,6 +6,7 @@ import userRouter from './routes/user.route.js';
 import productRouter from './routes/products.route.js';
 import cartRouter from './routes/cart.route.js';
 import ordersRouter from './routes/order.route.js';
+import { PORT } from './config/env.config.js';
 
 
 const app = express();
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
 await connectToDataBase();
 await connectToCloud();
 
-const port = process.env.PORT || 5000
+const port = PORT || 5000
 
 app.listen(port, "0.0.0.0", async () => {
     console.log(`running on http://localhost:${port}`);
