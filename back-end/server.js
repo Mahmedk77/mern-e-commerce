@@ -28,8 +28,10 @@ app.get('/', (req, res) => {
 await connectToDataBase();
 await connectToCloud();
 
-app.listen(PORT, () => {
-    console.log(`Running on http://localhost:${PORT}`)
+if(process.env.NODE_ENV !== "production"){
+    const PORT = PORT || 5000;
+    app.listen(PORT, () => {
+    console.log(`Running locally on http://localhost:${PORT}`)
 })
-
+}
 export default app;
