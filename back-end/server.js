@@ -12,7 +12,7 @@ import { PORT } from './config/env.config.js';
 const app = express();
 
 app.use(cors({
-  origin: "https://mern-e-commerce-weld.vercel.app/",
+  origin: "https://mern-e-commerce-weld.vercel.app",
   credentials: true
 }));
 
