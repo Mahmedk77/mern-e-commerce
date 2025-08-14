@@ -9,6 +9,7 @@ const List = ({ token }) => {
  
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDemo, setIsDemo] = useState(true);
 
   const fetchList = async () => {
     try {
@@ -32,22 +33,25 @@ const List = ({ token }) => {
   }
 
   const removeProduct = async(id) => {
-    try {
-      const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } })
-      console.log(response);
-      if(response.data.success){
-        toast.success(response.data.message);
-        await fetchList();
-      } else{
-        toast.error(response.data.message);
+      if(!isDemo){
+          try {
+          const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } })
+          console.log(response);
+          if(response.data.success){
+            toast.success(response.data.message);
+            await fetchList();
+          } else{
+            toast.error(response.data.message);
+          }
+        } catch (error) {
+          console.log(error);
+        toast.error(error.message); 
+        }
+      } else {
+        toast.error("Disabled in Demo Mode");
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message); 
-      
     }
-  }
-
+     
   useEffect(() => {
     fetchList()
   }, [])

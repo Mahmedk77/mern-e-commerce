@@ -18,7 +18,7 @@ const Navbar = () => {
         <Link to={'/'}>
         <img src={assets.logo} alt="Store Logo Image" className='w-36' />
         </Link>
-        <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
+        <ul className='hidden sm:flex gap-5 text-sm text-gray-700 items-center'>
             <NavLink to={'/'} className="flex flex-col items-center justify-center ">
                 <p>HOME</p>
                 <hr className={`w-2/4 border-none h-[1.5px] bg-gray-700 hidden`}/>
@@ -35,6 +35,9 @@ const Navbar = () => {
                 <p>CONTACT</p>
                 <hr className={`w-2/4 border-none h-[1.5px] bg-gray-700 hidden`}/>
             </NavLink>
+            <div className='flex items-center justify-center h-[32px] w-28 border border-gray-200 rounded-full cursor-pointer'>
+                <p className='text-xs'>Admin Panel</p>
+            </div>
         </ul>
         <div className='flex items-center gap-6'>
             <Link to={'/collection'}>
@@ -74,6 +77,7 @@ const Navbar = () => {
                 <NavLink onClick={()=>{setVisible(false)}} to={'/about'} className={`py-2 pl-6 border`}>ABOUT</NavLink>
                 <NavLink onClick={()=>{setVisible(false)}} to={'/collection'} className={`py-2 pl-6 border`}>COLLECTIONS</NavLink>
                 <NavLink onClick={()=>{setVisible(false)}} to={'/contact'} className={`py-2 pl-6 border`}>CONTACT</NavLink>
+                <NavLink onClick={()=>{setVisible(false)}} to={'http://localhost:5173/'} className={`py-2 pl-6 border`}>ADMIN PANEL</NavLink>
             </div>    
       </div>
         
