@@ -25,13 +25,14 @@ app.get('/', (req, res) => {
     res.send('API working...');
 })
 
-await connectToDataBase();
-await connectToCloud();
 
 const port = PORT || 5000
 
 app.listen(port, "0.0.0.0", async () => {
     console.log(`running on http://localhost:${port}`);
+    await connectToDataBase();
+    await connectToCloud();
+
 })
 
 
