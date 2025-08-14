@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets.js'
-import { Link, Navigate, NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext.jsx'
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
@@ -35,9 +35,11 @@ const Navbar = () => {
                 <p>CONTACT</p>
                 <hr className={`w-2/4 border-none h-[1.5px] bg-gray-700 hidden`}/>
             </NavLink>
-            <div className='flex items-center justify-center h-[32px] w-28 border border-gray-200 rounded-full cursor-pointer'>
+            <a href="https://forever-admin-lilac-eta.vercel.app" target="_blank" rel="noopener noreferrer"
+            className='flex items-center justify-center h-[32px] w-28 border border-gray-200 rounded-full cursor-pointer'>
                 <p className='text-xs'>Admin Panel</p>
-            </div>
+            </a>
+            
         </ul>
         <div className='flex items-center gap-6'>
             <Link to={'/collection'}>
