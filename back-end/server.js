@@ -20,7 +20,6 @@ app.use('/api/cart', cartRouter);
 app.use('/api/order', ordersRouter);
 
 
-
 app.get('/', (req, res) => {
     res.send('API working...');
 })
@@ -30,7 +29,7 @@ await connectToCloud();
 
 const port = process.env.PORT || 5000
 
-app.listen(port, async () => {
+app.listen(port, "0.0.0.0", async () => {
     console.log(`running on http://localhost:${port}`);
 })
 
