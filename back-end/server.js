@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import { PORT } from './config/env.config.js';
 import connectToDataBase from './config/mongoDB.config.js';
 import connectToCloud from './config/cloundinary.config.js';
 import userRouter from './routes/user.route.js';
@@ -29,7 +28,7 @@ app.get('/', (req, res) => {
 await connectToDataBase();
 await connectToCloud();
 
-const port = PORT || 5000
+const port = process.env.PORT || 5000
 
 app.listen(port, async () => {
     console.log(`running on http://localhost:${port}`);
