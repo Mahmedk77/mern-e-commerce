@@ -29,6 +29,12 @@ app.get('/', (req, res) => {
 await connectToDataBase();
 await connectToCloud();
 
+const port = PORT || 5000
+
+app.listen(port, async () => {
+    console.log(`running on http://localhost:${port}`);
+})
+
 
 
 export default app;
