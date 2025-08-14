@@ -11,7 +11,10 @@ import { PORT } from './config/env.config.js';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://mern-e-commerce-weld.vercel.app",
+  credentials: true
+}));
 
 app.use(express.json());
 
