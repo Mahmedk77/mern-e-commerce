@@ -6,8 +6,6 @@ import userRouter from './routes/user.route.js';
 import productRouter from './routes/products.route.js';
 import cartRouter from './routes/cart.route.js';
 import ordersRouter from './routes/order.route.js';
-import { PORT } from './config/env.config.js';
-
 
 const app = express();
 
@@ -27,22 +25,14 @@ app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', ordersRouter);
 
-
 app.get('/', (req, res) => {
-    res.send('API working...');
-})
+  res.send('API working...');
+});
 
-
-const port = PORT || 5000
-
-app.listen(port, "0.0.0.0", async () => {
-    console.log(`running on http://localhost:${port}`);
-    await connectToDataBase();
-    await connectToCloud();
-
-
-})
-
-
+// Connect DB + Cloudinary on first request
+(async () => {
+  await connectToDataBase();
+  await connectToCloud();
+})();
 
 export default app;
