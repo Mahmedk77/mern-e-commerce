@@ -15,10 +15,8 @@ const app = express();
 // CORS
 app.use(cors({
   origin: [
-    "https://mern-e-commerce-weld.vercel.app",
+    "https://forever-backend-five-pearl.vercel.app",
     "https://forever-admin-lilac-eta.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:5174"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true
