@@ -37,8 +37,8 @@ app.get('/', (req, res) => {
 let isConnected = false;
 const initConnections = async () => {
   if (!isConnected) {
-    await connectToDataBase();
-    await connectToCloud();
+      await connectToCloud();
+      await connectToDataBase();
     isConnected = true;
   }
 };
