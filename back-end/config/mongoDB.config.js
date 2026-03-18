@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
-import { DB_URI } from "./env.config.js";
-
-if(!DB_URI){
-    throw new Error("DB_URI not found!")
-}
 
 const connectToDataBase = async () => {
     try {
-        await mongoose.connect(DB_URI);
-        console.log("Connected to database in dev mode");
-        
-
+        await mongoose.connect(process.env.MONGODB_URI, {
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 10000,
+        });
+        console.log("Connected to database");
     } catch (error) {
-        console.log("Error connecting to Database", error);
-        
-        process.exit(1);
+        console.error("Error connecting to Database:", error.message);
+        throw error; // don't use process.exit() in serverless!
     }
 }
 

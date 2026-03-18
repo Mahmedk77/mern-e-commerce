@@ -1,6 +1,13 @@
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 
-config();
+config(); // works locally, harmlessly does nothing on Vercel
 
-export const { DB_URI, CLOUDINARY_NAME, CLOUDINARY_SECRET_KEY, 
-    CLOUDINARY_API_KEY, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD, STRIPE_KEY, PORT } = process.env
+export const DB_URI = process.env.DB_URI;
+export const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
+export const CLOUDINARY_SECRET_KEY = process.env.CLOUDINARY_SECRET_KEY;
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+export const JWT_SECRET = process.env.JWT_SECRET;
+export const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+export const STRIPE_KEY = process.env.STRIPE_KEY;
+export const PORT = process.env.PORT;
