@@ -34,19 +34,29 @@ app.get('/', (req, res) => {
 });
 
 // Connect once, outside the handler
-let isConnected = false;
-const initConnections = async () => {
-  if (!isConnected) {
-      await connectToCloud();
-      await connectToDataBase();
-    isConnected = true;
-  }
-};
+// let isConnected = false;
+// const initConnections = async () => {
+//   if (!isConnected) {
+//       await connectToCloud();
+//       await connectToDataBase();
+//     isConnected = true;
+//   }
+// };
 
-// Wrap once, not on every request
+// // Wrap once, not on every request
+// const serverlessHandler = serverless(app);
+
+// export default async (req, res) => {
+//   await initConnections();
+//   return serverlessHandler(req, res);
+// };
+
+// Connect immediately when the module loads, not per-request
+connectToDataBase();
+connectToCloud();
+
 const serverlessHandler = serverless(app);
 
 export default async (req, res) => {
-  await initConnections();
   return serverlessHandler(req, res);
 };
