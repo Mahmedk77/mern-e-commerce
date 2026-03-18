@@ -10,6 +10,7 @@ import productRouter from '../routes/products.route.js';
 import cartRouter from '../routes/cart.route.js';
 import ordersRouter from '../routes/order.route.js';
 
+
 const app = express();
 
 app.use(cors({
