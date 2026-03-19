@@ -26,6 +26,20 @@ app.use(cors({
 
 app.use(express.json());
 
+
+let isConnected = false;
+
+app.use(async (req, res, next) => {
+  if(!isConnected) {
+    await connectToDataBase();
+    await connectToCloud();
+
+    isConnected = true;
+  }
+  next()
+})
+
+
 // Routes
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
@@ -38,16 +52,6 @@ app.get('/', (req, res) => {
 });
 
 // ⚠️ Connect DB & Cloud INSIDE handler
-let isConnected = false;
-
-app.use(async (req, res, next) => {
-  if(!isConnected) {
-    await connectToDataBase();
-    await connectToCloud();
-
-    isConnected = true;
-  }
-})
 
 
 // const handler = async (req, res) => {
