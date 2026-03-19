@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import serverless from 'serverless-http';
+// import serverless from 'serverless-http';
 
 const app = express();
 
@@ -19,4 +19,4 @@ app.get('/', (req, res) => {
   res.json({ message: 'API working!' });
 });
 
-export default serverless(app);
+export default serverless(app); 

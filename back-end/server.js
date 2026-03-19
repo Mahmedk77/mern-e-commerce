@@ -40,13 +40,24 @@ app.get('/', (req, res) => {
 // ⚠️ Connect DB & Cloud INSIDE handler
 let isConnected = false;
 
-const handler = async (req, res) => {
-  if (!isConnected) {
+app.use(async (req, res, next) => {
+  if(!isConnected) {
     await connectToDataBase();
     await connectToCloud();
+
     isConnected = true;
   }
-  return serverless(app)(req, res);
-};
+})
 
-export default handler;
+
+// const handler = async (req, res) => {
+//   if (!isConnected) {
+//     await connectToDataBase();
+//     await connectToCloud();
+//     isConnected = true;
+//   }
+//   return serverless(app)(req, res);
+// };
+
+module.exports = app;
+// export default app;
