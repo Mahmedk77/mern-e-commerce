@@ -59,5 +59,5 @@ app.use(async (req, res, next) => {
 //   return serverless(app)(req, res);
 // };
 
-module.exports = app;
+export default app;
 // export default app;
